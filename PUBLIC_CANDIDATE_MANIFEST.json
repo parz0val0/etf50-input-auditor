@@ -14,23 +14,33 @@
     },
     {
       "path": "README.md",
-      "bytes": 6488,
-      "sha256": "4ed868d1db70f108cd4f92a4e1e595e42e04c35009ba9a96894b01df648f938b"
+      "bytes": 4118,
+      "sha256": "5a289bd42a124627e85e67945e3e51603572d6225aedcd17d6edf165a253031d"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 5445,
-      "sha256": "2880c51be2ce9484f710556aade1e668280050de0bdd1428300c4e1e090af6ba"
+      "bytes": 3641,
+      "sha256": "3b94b5f28da91e7a9c91a90ebf4b63d4211a3a9cdecf0cd192d4ecc54cbf37c7"
     },
     {
       "path": "RELEASE_EVIDENCE.json",
-      "bytes": 431,
-      "sha256": "4d404ed4e3fe67b14f582637273213db9069bcbfd7dd37e2084f54b1513f3add"
+      "bytes": 646,
+      "sha256": "fa2c6ef4a07ff4ca405bd6bf90c41f83f8ffa0a4df3867613e24baf00d6a1243"
     },
     {
       "path": "docs/ADMISSION_SCHEMA.md",
       "bytes": 4823,
       "sha256": "2f37b5f67cd947d7469604d432b0a20de01debec732e87176f0b75c9e79602ed"
+    },
+    {
+      "path": "docs/GETTING_STARTED.md",
+      "bytes": 6417,
+      "sha256": "9938e3ac924e90dfe6b1d9d008559d42fce3313e8217351be0bdf2e521ae657a"
+    },
+    {
+      "path": "docs/GETTING_STARTED.zh-CN.md",
+      "bytes": 5378,
+      "sha256": "0d838771321cabdc8b54254e21d3826cc626cc3b08563414f7c4b2f5d1509617"
     },
     {
       "path": "docs/IMPORT_GUIDE.md",
@@ -64,8 +74,18 @@
     },
     {
       "path": "docs/RELEASE_CHECKLIST.md",
-      "bytes": 1503,
-      "sha256": "428271c370c4529d42912fca2bba84b47f05ee6f61aadb258f1e963273c44f9f"
+      "bytes": 1583,
+      "sha256": "77edc7c1fe372b9091e18a681b9c669b2fc4349471cca3db34b1927bacef5f47"
+    },
+    {
+      "path": "docs/REPORT_WALKTHROUGH.md",
+      "bytes": 2734,
+      "sha256": "8c5bb5b8c0a1da4c6c58ef9909bc233744cd27db4b8e2ce590341c984ab07136"
+    },
+    {
+      "path": "docs/REPORT_WALKTHROUGH.zh-CN.md",
+      "bytes": 2385,
+      "sha256": "d48043ae5b5717349f5810da8811b61ce987ed24c438963758bd23299a059d26"
     },
     {
       "path": "docs/SIMULATED_USER_EVALUATION.md",
@@ -81,6 +101,16 @@
       "path": "docs/TOOL_BOUNDARIES.md",
       "bytes": 3280,
       "sha256": "96438aee1273269b2a52884a0f313dd47934d9c408198406a044bfd87e46c9ef"
+    },
+    {
+      "path": "docs/assets/workflow.en.svg",
+      "bytes": 4352,
+      "sha256": "1970a0e4d513ccf5026feeeb1e65bbe9ec831afdad8d0aabc68bb723e52222d6"
+    },
+    {
+      "path": "docs/assets/workflow.zh.svg",
+      "bytes": 4382,
+      "sha256": "dd4e3659a41dda34218e5d7f2d46308c63315411b372ec41c262b749d43d85e7"
     },
     {
       "path": "examples/admission/synthetic_consistent.csv",
@@ -209,8 +239,8 @@
     },
     {
       "path": "scripts/prepare_tool_release.py",
-      "bytes": 5828,
-      "sha256": "24c7e29dda8580d8c94e4b55212339b30fce26e51e78462bba590da687fa25e5"
+      "bytes": 6215,
+      "sha256": "96617a085735c642dcfc295f51c885533a02739a2527fdd6bf9ca7502d1197f5"
     },
     {
       "path": "scripts/reproduce_onboarding_case.py",

@@ -1,73 +1,65 @@
 # ETF50 input auditor
 
-[English](README.md) | [简体中文](README.zh-CN.md)
+[English](README.md) · [简体中文](README.zh-CN.md) · [Try the example](docs/REPORT_WALKTHROUGH.md)
 
-A small local research-input checker for people with 510050 option CSVs preparing historical-IV or same-term call-put work. **0.4.0rc6** adds conservative supplier CSV preflight. It identifies contradictions, missing evidence and unsupported static terms before modeling. This is ordinary Python software: no AI service, account, API key or network is needed at runtime. Installation may download a build backend. It does not price options, certify data or complete the historical empirical study.
+**Check your 510050 option CSV before you model it.**
 
-## Install and verify (publicly runnable)
+- Find input conflicts and missing evidence, with record-level explanations.
+- Review supplier column suggestions, then explicitly confirm a mapping.
+- Run locally with Python: no AI account or runtime network. Consistency is not certification.
 
-Python 3.9+, from this repository root on macOS/Linux:
+## A four-step review
+
+![Four steps: receive a CSV and its dictionary; find conflicts and gaps; a person confirms corrections from evidence; rerun while retaining unknowns. No automatic repair or certification.](docs/assets/workflow.en.svg)
+
+1. **Receive:** keep the original CSV and read its dictionary.
+2. **Inspect:** preflight suggests headers; the audit flags conflicts and missing evidence.
+3. **Human review:** confirm mapping, units and genuinely available observations. Do not invent facts.
+4. **Recheck:** inspect historical-IV and pairing states separately. Unknown evidence stays unknown.
+
+## Start with a working example
+
+Python 3.9+, macOS/Linux. From this repository root (publicly runnable):
 
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 .venv/bin/etf50-audit --version
-.venv/bin/etf50-preflight --help
-```
-
-Core runtime has no third-party dependencies. Windows paths have not been tested. See [installation](docs/INSTALLATION.md).
-
-## Complete synthetic demonstration (publicly runnable)
-
-Use fresh output paths. The normal case, failure case and correction are fully synthetic, never market evidence:
-
-```sh
-.venv/bin/etf50-audit examples/admission/synthetic_consistent.csv --policy examples/admission/synthetic_policy.json --output audit-output/normal
-.venv/bin/etf50-audit examples/admission/synthetic_failures.csv --policy examples/admission/synthetic_failure_policy.json --output audit-output/failures
 .venv/bin/python scripts/reproduce_onboarding_case.py --output onboarding-demo
 ```
 
-The first command exits0, the second exits1 with a report (expected findings). The third exits0 after verifying the before/after case: future ETF input, not-yet-known q and settlement-as-market-price are corrected using explicit fictional earlier observations, estimates and BBO. Read `onboarding-demo/comparison.md` and its HTML report links. Corrected inputs are only conditionally consistent; their evidence is fictional. [Case details](docs/ONBOARDING_CASE.md).
+Version: **0.4.0rc6**. Open `onboarding-demo/comparison.md` to see three problems, the explicit human corrections and both reports. Use a fresh output directory. The demonstration swaps predetermined synthetic fixtures and exits0 when expected before/after behavior is reproduced. Real corrections must be supplied and confirmed by a person.
 
-## Supplier CSV: inspect, review, then convert
+[See the actual JSON and offline report](docs/REPORT_WALKTHROUGH.md) · [Full normal/failure/import walkthrough](docs/GETTING_STARTED.md)
 
-[Supplier requirements](docs/SUPPLIER_REQUIREMENTS.md) distinguish the ten parseable base columns from additional historical-IV/pair evidence and high-quality research requirements. UTF-8 CSV (BOM allowed), one contract per Shanghai date, unique headers; Excel must first be exported. Do not infer units, timezone, source or price meaning from convenience. [Full schema](docs/ADMISSION_SCHEMA.md).
+## Bring your own supplier CSV
 
-Publicly runnable preflight of a synthetic daily CSV:
+| Start here | What you need |
+|---|---|
+| Basic inspection | UTF-8 CSV, one contract per Shanghai date; ten base columns. Excel: export CSV first. |
+| Historical-IV inputs | Independent ETF observation, r/q conventions and known times, effective terms and source evidence. |
+| Call-put pairing | Same-term C/P, business timestamps, bid/ask and quantities. |
 
-```sh
-.venv/bin/etf50-preflight examples/admission/synthetic_minimal_daily.csv --output audit-output/preflight
-```
+[Supplier checklist](docs/SUPPLIER_REQUIREMENTS.md) · [Exact schema](docs/ADMISSION_SCHEMA.md) · [Import guide](docs/IMPORT_GUIDE.md)
 
-Expected exit0 for an unambiguous basic schema; the JSON still lists missing purpose evidence and **does not certify admission**. It includes suggestions, ambiguities, type/date/time warnings, unknown columns and up to five preview rows. Preflight exit0 means the inspection itself found no structural/mapping warnings; exit1 means review findings or unsuccessful admission; exit2 means invalid input/output. Main audit has its own0/1/2 meaning below.
+Preflight suggestions do not infer prices, units or timezones. Conversion needs a confirmed one-to-one mapping and current source hash, and does not change values. Keep originals and reports private; previews contain IDs and prices. Store them in ignored `user-data/` and `audit-output/` and inspect before sharing.
 
-User-data templates (require your own legal local files; not a public demo):
+## Read the result
 
-```sh
-.venv/bin/etf50-preflight user-data/vendor.csv --output audit-output/review
-.venv/bin/etf50-preflight user-data/vendor.csv --mapping user-data/confirmed-mapping.json --expected-source-sha256 SOURCE_SHA256_FROM_REVIEW --policy user-data/policy.json --output audit-output/converted
-```
+| State | Meaning |
+|---|---|
+| `blocked` | An implemented hard contradiction or unsupported input. |
+| `needs_evidence` | Missing or unusable evidence; some cases require correcting values too. |
+| `conditional_input_consistent` | Declared inputs agree under implemented checks; facts remain unverified. |
 
-Review the suggestions and original dictionary; write a JSON object such as `{"date":"交易日期","code":"合约代码"}` expanded to all required fields. Choosing `price` explicitly does not verify its semantics. Alias collisions need a deliberate one-to-one mapping. Missing required columns produce a report but no normalized CSV. Confirmed mapping only renames columns, preserving values; it does not translate C/P, dates, units or fabricate evidence. Each conversion requires the current source hash; reusable mappings are hashed too. Successful conversion calls the **same main checker**, optionally with your policy; read the embedded admission result. Missing policy prevents verified coverage. The source is untouched and existing output directories are refused.
+Main audit exits0/1/2 for consistent / findings / invalid input. **Preflight exit0 only means its inspection succeeded without mapping/type warnings; it is not admission.** See the [full walkthrough](docs/GETTING_STARTED.md) for commands and purpose-specific interpretation.
 
-Previews contain original IDs/prices: keep them private. Put files in ignored `user-data/` and `audit-output/`. Inspect every report before sharing; gitignore is not a security guarantee.
+## Scope and evidence
 
-Publicly runnable Chinese-header/BOM confirmation demonstration; it creates a synthetic supplier CSV, records an explicit mapping and source hash, and verifies the same primary checker:
+Static M/10000 contracts only; adjusted, cross-event and unverified event-day terms are rejected. This tool does not authenticate sources or permissions, certify the daily universe, calculate IV/carry, trade or provide financial advice. The historical empirical study remains incomplete. The simulated evaluation did not establish higher accuracy or human time savings.
 
-```sh
-.venv/bin/python scripts/reproduce_preflight_case.py --output audit-output/preflight-demo
-```
-
-Expected exit0; fictional evidence is never authenticated.
-
-## Interpret results and limits
-
-Main-audit exit0 means implemented checks are conditionally consistent; exit1 means reported findings; exit2 means malformed input/output. `blocked` means an implemented hard contradiction; `needs_evidence` means absent/unusable evidence; `conditional_input_consistent` means declared inputs agree under implemented conditions. Historical-IV and pair purposes are separate; peer failures propagate across the whole pair. Some known unusable inputs still reside in the needs-evidence bucket; do not treat that bucket as a promise that adding a citation fixes values.
-
-Only static M/10000 terms are supported. Adjusted, cross-event and unverified event-day terms are rejected. User-declared event coverage is not certified. No source/permission authentication, daily universe certification, IV/carry estimation, market effectiveness, financial advice or trading. Unknown inputs remain unknown. HTML escaping/structure is tested; browser visual review remains unverified. [Boundaries](docs/TOOL_BOUNDARIES.md).
-
-The [first simulated evaluation](docs/SIMULATED_USER_EVALUATION.md) did not establish higher accuracy or human time savings. Subsequent simulated regressions test mechanisms, not an independent efficacy claim. The reusable numerical toolkit and input checks are deliverables; the original historical empirical study remains incomplete. [Numerical auxiliary](docs/NUMERICAL_AUXILIARY.md) · [Related work](docs/RELATED_WORK.md) · [Release checklist](docs/RELEASE_CHECKLIST.md).
+[Boundaries](docs/TOOL_BOUNDARIES.md) · [Simulated evaluation](docs/SIMULATED_USER_EVALUATION.md) · [Validation](docs/PREFLIGHT_VALIDATION.md) · [Related work](docs/RELATED_WORK.md) · [Numerical auxiliary](docs/NUMERICAL_AUXILIARY.md) · [Release status](docs/RELEASE_CHECKLIST.md)
 
 ## License
 
-[MIT](LICENSE), Copyright (c) 2026 JasonChen. This license covers this software, not supplier data or third-party materials; preserve applicable attributions. This is a local review candidate; repository publication awaits independent review.
+[MIT](LICENSE) · Copyright (c) 2026 JasonChen. Applies to this software, not supplier data or third-party materials. Version0.4.0rc6 is published. No remote CI is configured.

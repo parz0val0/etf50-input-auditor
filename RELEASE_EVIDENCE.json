@@ -1,10 +1,14 @@
 {
   "candidate_version": "0.4.0rc6",
   "content_scope": "own code and synthetic examples; no historical market outputs",
-  "not_published": true,
+  "not_published": false,
+  "code_release_published": true,
+  "code_release_commit": "5074c46cddd8605ffad5bfddbc56b1e0c0ac2a92",
+  "documentation_update_status": "pre_push_review_snapshot_not_live_status",
+  "remote_ci": "not_configured",
   "license": "MIT; Copyright (c) 2026 JasonChen",
   "relative_links": {
-    "checked_relative_links": 44,
+    "checked_relative_links": 100,
     "missing": [],
     "passed": true
   },

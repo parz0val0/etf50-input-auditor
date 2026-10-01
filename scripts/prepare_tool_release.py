@@ -7,7 +7,7 @@ import re
 import shutil
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-FILES=('.gitignore','README.md','README.zh-CN.md','LICENSE','docs/SUPPLIER_REQUIREMENTS.md','docs/PREFLIGHT_VALIDATION.md','pyproject.toml','docs/ADMISSION_SCHEMA.md','docs/TOOL_BOUNDARIES.md','docs/RELATED_WORK.md','docs/RELEASE_CHECKLIST.md','docs/ONBOARDING_CASE.md','docs/IMPORT_GUIDE.md','docs/INSTALLATION.md','docs/SIMULATED_USER_EVALUATION.md','docs/NUMERICAL_AUXILIARY.md','scripts/reproduce_onboarding_case.py','scripts/reproduce_preflight_case.py','scripts/numerical_budget_study.py','scripts/check_relative_links.py','scripts/prepare_tool_release.py')
+FILES=('.gitignore','README.md','README.zh-CN.md','docs/GETTING_STARTED.md','docs/GETTING_STARTED.zh-CN.md','docs/REPORT_WALKTHROUGH.md','docs/REPORT_WALKTHROUGH.zh-CN.md','docs/assets/workflow.en.svg','docs/assets/workflow.zh.svg','LICENSE','docs/SUPPLIER_REQUIREMENTS.md','docs/PREFLIGHT_VALIDATION.md','pyproject.toml','docs/ADMISSION_SCHEMA.md','docs/TOOL_BOUNDARIES.md','docs/RELATED_WORK.md','docs/RELEASE_CHECKLIST.md','docs/ONBOARDING_CASE.md','docs/IMPORT_GUIDE.md','docs/INSTALLATION.md','docs/SIMULATED_USER_EVALUATION.md','docs/NUMERICAL_AUXILIARY.md','scripts/reproduce_onboarding_case.py','scripts/reproduce_preflight_case.py','scripts/numerical_budget_study.py','scripts/check_relative_links.py','scripts/prepare_tool_release.py')
 TESTS=('test_preflight.py','test_admission.py','test_black_scholes.py','test_numerical.py','test_implied_volatility.py','test_heston.py','test_experiments.py','test_research.py','test_tool_release.py','test_onboarding.py')
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def audit_tree(root):
@@ -16,7 +16,7 @@ def audit_tree(root):
  for p in root.rglob('*'):
   if p.is_symlink():findings.append({'path':str(p.relative_to(root)),'reason':'symlink'})
   if not p.is_file():continue
-  if p.suffix not in ('.py','.md','.toml','.json','.csv','.html') and p.name!='.gitignore':continue
+  if p.suffix not in ('.py','.md','.toml','.json','.csv','.html','.svg') and p.name!='.gitignore':continue
   text=p.read_text(encoding='utf-8')
   if pattern.search(text):findings.append({'path':str(p.relative_to(root)),'reason':'personal_absolute_path'})
   if re.search(r'AKIA[0-9A-Z]{16}',text):findings.append({'path':str(p.relative_to(root)),'reason':'possible_access_key'})
@@ -54,7 +54,7 @@ def build(out):
  spec=spec_from_file_location('relative_links',out/'scripts/check_relative_links.py');module=module_from_spec(spec);spec.loader.exec_module(module)
  links=module.missing_links(out);privacy=audit_tree(out)
  if not links['passed'] or privacy:raise ValueError('public-content checks failed: '+json.dumps({'links':links,'privacy':privacy}))
- evidence={'candidate_version':'0.4.0rc6','content_scope':'own code and synthetic examples; no historical market outputs','not_published':True,'license':'MIT; Copyright (c) 2026 JasonChen','relative_links':links,'privacy_static_findings':privacy,'verification':'build checks only; execution evidence maintained separately until final manifest'}
+ evidence={'candidate_version':'0.4.0rc6','content_scope':'own code and synthetic examples; no historical market outputs','not_published':False,'code_release_published':True,'code_release_commit':'5074c46cddd8605ffad5bfddbc56b1e0c0ac2a92','documentation_update_status':'pre_push_review_snapshot_not_live_status','remote_ci':'not_configured','license':'MIT; Copyright (c) 2026 JasonChen','relative_links':links,'privacy_static_findings':privacy,'verification':'build checks only; execution evidence maintained separately until final manifest'}
  (out/'RELEASE_EVIDENCE.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n')
  write_manifest(out)
  return out
