@@ -1,0 +1,18 @@
+{
+  "data_kind": "synthetic",
+  "scope": "fictional vendor family; not a real provider dictionary",
+  "price_semantics": "daily_close",
+  "unit_semantics": "ETF shares per option contract",
+  "date_format": "YYYY/MM/DD",
+  "mapping": {
+    "date": "交易日期",
+    "code": "合约编码",
+    "underlying": "标的代码",
+    "cp": "认购认沽",
+    "strike": "行权价格",
+    "expiry": "到期日",
+    "contract_unit": "合约单位",
+    "adjustment_flag": "调整标记",
+    "price": "收盘价"
+  }
+}

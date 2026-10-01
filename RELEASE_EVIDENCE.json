@@ -1,0 +1,13 @@
+{
+  "candidate_version": "0.4.0rc6",
+  "content_scope": "own code and synthetic examples; no historical market outputs",
+  "not_published": true,
+  "license": "MIT; Copyright (c) 2026 JasonChen",
+  "relative_links": {
+    "checked_relative_links": 44,
+    "missing": [],
+    "passed": true
+  },
+  "privacy_static_findings": [],
+  "verification": "build checks only; execution evidence maintained separately until final manifest"
+}

@@ -1,0 +1,30 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+*.py[cod]
+
+# Licensed/user-supplied market data and all row-level derivatives stay local.
+data/private/
+*.xlsx
+*.xls
+*.parquet
+*.sqlite
+*.sqlite3
+
+# Local archived provider captures and private handover notes.
+data/stage3_real_sample*.json
+data/stage3_audit*.json
+reports/handover/
+
+# Tool-user inputs and generated reports remain local.
+user-data/
+audit-output/
+demo-consistent/
+demo-failures/
+numerical-demo.json
+build/
+dist/
+
+# Generated onboarding reports.
+onboarding-demo/

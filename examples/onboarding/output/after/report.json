@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.4.0rc6",
+  "checker_sha256": "867b8949a92fab692388e664623ef2a24324b362b67d04c39a71dcdb1a4c552a",
+  "input_sha256": "c0393625faac061999640fa0712ea3d9f1e750a71eaa61a7569ca951b8ac287b",
+  "policy_sha256": "55388e4d246046534fad0c67840653156f5438e339b554dca802277ce6c38009",
+  "configuration": {
+    "schema_version": 1,
+    "data_kind": "synthetic",
+    "rights_reference": "Self-generated fictional examples; no market observations.",
+    "coverage": {
+      "start": "2030-01-01",
+      "end": "2030-12-31",
+      "complete": true,
+      "evidence_reference": "Fictional synthetic calendar; not an SSE history."
+    },
+    "events": [],
+    "max_pair_lag_seconds": 1
+  },
+  "evidence_level": "synthetic_declared",
+  "scope": "输入一致性原型；非数据许可认证、完整历史资格认证或投资建议",
+  "limits": [
+    "不下载/上传数据；不验证引用真实性或许可",
+    "不验证独立每日合约母集或日期块样本外研究",
+    "不计算IV、carry或价格拟合；不支持动态调整合约",
+    "条件一致不等于研究合格；后续需外部证据审阅"
+  ],
+  "summary": {
+    "rows": 6,
+    "columns": [
+      "date",
+      "code",
+      "underlying",
+      "cp",
+      "strike",
+      "expiry",
+      "contract_unit",
+      "adjustment_flag",
+      "price",
+      "price_type",
+      "bid",
+      "ask",
+      "bid_qty",
+      "ask_qty",
+      "price_known_at",
+      "spot",
+      "spot_known_at",
+      "r",
+      "q",
+      "r_known_at",
+      "q_known_at",
+      "r_reference",
+      "q_reference",
+      "terms_reference",
+      "source_reference"
+    ],
+    "historical_iv": {
+      "conditional_input_consistent": 6
+    },
+    "pair": {
+      "conditional_input_consistent": 6
+    },
+    "unique_term_pairs": 3,
+    "conditional_pairs": 3,
+    "issue_counts": {},
+    "severity_counts": {}
+  },
+  "records": [
+    {
+      "record": 1,
+      "issues": [],
+      "historical_iv": "conditional_input_consistent",
+      "pair": "conditional_input_consistent",
+      "peer_record": 2
+    },
+    {
+      "record": 2,
+      "issues": [],
+      "historical_iv": "conditional_input_consistent",
+      "pair": "conditional_input_consistent",
+      "peer_record": 1
+    },
+    {
+      "record": 3,
+      "issues": [],
+      "historical_iv": "conditional_input_consistent",
+      "pair": "conditional_input_consistent",
+      "peer_record": 4
+    },
+    {
+      "record": 4,
+      "issues": [],
+      "historical_iv": "conditional_input_consistent",
+      "pair": "conditional_input_consistent",
+      "peer_record": 3
+    },
+    {
+      "record": 5,
+      "issues": [],
+      "historical_iv": "conditional_input_consistent",
+      "pair": "conditional_input_consistent",
+      "peer_record": 6
+    },
+    {
+      "record": 6,
+      "issues": [],
+      "historical_iv": "conditional_input_consistent",
+      "pair": "conditional_input_consistent",
+      "peer_record": 5
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.4.0rc6",
+  "checker_sha256": "867b8949a92fab692388e664623ef2a24324b362b67d04c39a71dcdb1a4c552a",
+  "input_sha256": "ec8379472bfc1656ad31abe0c052df28190e2fa218ab862a0a5160691bd0695f",
+  "policy_sha256": "5b14e1c565e5fb87247537fe22a1e759da18fc3958313b4e362a48d6bbbd0e31",
+  "configuration": {
+    "schema_version": 1,
+    "data_kind": "synthetic",
+    "rights_reference": "Self-generated fictional examples; no market observations.",
+    "coverage": {
+      "start": "2030-01-01",
+      "end": "2030-12-31",
+      "complete": true,
+      "evidence_reference": "Fictional synthetic calendar; not an SSE history."
+    },
+    "events": [
+      {
+        "date": "2030-02-01",
+        "evidence_reference": "fictional synthetic adjustment"
+      }
+    ],
+    "max_pair_lag_seconds": 1
+  },
+  "evidence_level": "synthetic_declared",
+  "scope": "输入一致性原型；非数据许可认证、完整历史资格认证或投资建议",
+  "limits": [
+    "不下载/上传数据；不验证引用真实性或许可",
+    "不验证独立每日合约母集或日期块样本外研究",
+    "不计算IV、carry或价格拟合；不支持动态调整合约",
+    "条件一致不等于研究合格；后续需外部证据审阅"
+  ],
+  "summary": {
+    "rows": 3,
+    "columns": [
+      "date",
+      "code",
+      "underlying",
+      "cp",
+      "strike",
+      "expiry",
+      "contract_unit",
+      "adjustment_flag",
+      "price",
+      "price_type",
+      "bid",
+      "ask",
+      "bid_qty",
+      "ask_qty",
+      "price_known_at",
+      "spot",
+      "spot_known_at",
+      "r",
+      "q",
+      "r_known_at",
+      "q_known_at",
+      "r_reference",
+      "q_reference",
+      "terms_reference",
+      "source_reference"
+    ],
+    "historical_iv": {
+      "blocked": 2,
+      "needs_evidence": 1
+    },
+    "pair": {
+      "blocked": 2,
+      "needs_evidence": 1
+    },
+    "unique_term_pairs": 0,
+    "conditional_pairs": 0,
+    "issue_counts": {
+      "BBO_MISSING_OR_INVALID": 1,
+      "CROSSES_ADJUSTMENT": 1,
+      "DYNAMIC_TERMS_UNSUPPORTED": 1,
+      "OUTSIDE_DECLARED_COVERAGE": 1,
+      "PAIR_MISSING_OR_AMBIGUOUS": 3,
+      "PRICE_TIME_MISSING": 1,
+      "Q_INPUT_MISSING": 1,
+      "R_INPUT_MISSING": 1,
+      "SETTLEMENT_NOT_INDEPENDENT": 1,
+      "SPOT_ALIGNMENT_MISSING": 1
+    },
+    "severity_counts": {
+      "error": 4,
+      "missing_evidence": 8
+    }
+  },
+  "records": [
+    {
+      "record": 1,
+      "issues": [
+        {
+          "code": "DYNAMIC_TERMS_UNSUPPORTED",
+          "severity": "error",
+          "scope": "all",
+          "message": "当前静态模型仅接受M/10000；调整合约未实现动态条款",
+          "repair": "保留原数据；单列调整合约，不能强改单位为10000"
+        },
+        {
+          "code": "SETTLEMENT_NOT_INDEPENDENT",
+          "severity": "error",
+          "scope": "historical_iv,pair",
+          "message": "结算价可能理论生成，不能作为独立市场验证价格",
+          "repair": "单列估值制度诊断，提供成交或同步BBO"
+        },
+        {
+          "code": "CROSSES_ADJUSTMENT",
+          "severity": "error",
+          "scope": "all",
+          "message": "静态条款跨调整事件",
+          "repair": "本版本不支持动态变换，单独研究或排除并记分母"
+        },
+        {
+          "code": "PAIR_MISSING_OR_AMBIGUOUS",
+          "severity": "missing_evidence",
+          "scope": "pair",
+          "message": "配对缺侧或同条款多ID歧义",
+          "repair": "按真实条款与交割篮子提供唯一完整C/P整对"
+        }
+      ],
+      "historical_iv": "blocked",
+      "pair": "blocked"
+    },
+    {
+      "record": 2,
+      "issues": [
+        {
+          "code": "PRICE_TIME_MISSING",
+          "severity": "missing_evidence",
+          "scope": "historical_iv,pair",
+          "message": "缺带时区且属于观察日的价格业务时间",
+          "repair": "提供真实业务时戳；日close不能假定同步"
+        },
+        {
+          "code": "SPOT_ALIGNMENT_MISSING",
+          "severity": "missing_evidence",
+          "scope": "historical_iv",
+          "message": "缺正现货及不晚于期权且滞后≤1秒的独立现货时戳",
+          "repair": "提供独立ETF序列，禁止未来填充；非默认放宽容差"
+        },
+        {
+          "code": "R_INPUT_MISSING",
+          "severity": "missing_evidence",
+          "scope": "historical_iv",
+          "message": "缺时点已知且有来源的r输入",
+          "repair": "提供输入值、已知时间、方法/版本；不默认0"
+        },
+        {
+          "code": "Q_INPUT_MISSING",
+          "severity": "missing_evidence",
+          "scope": "historical_iv",
+          "message": "缺时点已知且有来源的q输入",
+          "repair": "提供输入值、已知时间、方法/版本；不默认0"
+        },
+        {
+          "code": "BBO_MISSING_OR_INVALID",
+          "severity": "missing_evidence",
+          "scope": "pair",
+          "message": "缺非交叉双边报价及正数量",
+          "repair": "提供同步bid/ask和数量，日成交量不能代替深度"
+        },
+        {
+          "code": "PAIR_MISSING_OR_AMBIGUOUS",
+          "severity": "missing_evidence",
+          "scope": "pair",
+          "message": "配对缺侧或同条款多ID歧义",
+          "repair": "按真实条款与交割篮子提供唯一完整C/P整对"
+        }
+      ],
+      "historical_iv": "needs_evidence",
+      "pair": "needs_evidence"
+    },
+    {
+      "record": 3,
+      "issues": [
+        {
+          "code": "OUTSIDE_DECLARED_COVERAGE",
+          "severity": "error",
+          "scope": "all",
+          "message": "观察日至到期超出声明覆盖",
+          "repair": "补真实事件清单及独立master；不能仅扩大日期"
+        },
+        {
+          "code": "PAIR_MISSING_OR_AMBIGUOUS",
+          "severity": "missing_evidence",
+          "scope": "pair",
+          "message": "配对缺侧或同条款多ID歧义",
+          "repair": "按真实条款与交割篮子提供唯一完整C/P整对"
+        }
+      ],
+      "historical_iv": "blocked",
+      "pair": "blocked"
+    }
+  ]
+}

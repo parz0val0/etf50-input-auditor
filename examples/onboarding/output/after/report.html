@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>50ETF输入审查</title><style>body{font:16px system-ui;max-width:1200px;margin:2em auto;padding:1em}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:.5em;text-align:left;vertical-align:top}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>50ETF输入审查</h1><p>输入一致性原型；非数据许可认证、完整历史资格认证或投资建议</p><p>报告不包含原始价格或合约ID，但配置引用也可能含私有内容；分享前人工检查。</p><h2>运行与输入绑定</h2><pre>{
+  &quot;tool_version&quot;: &quot;0.4.0rc6&quot;,
+  &quot;checker_sha256&quot;: &quot;867b8949a92fab692388e664623ef2a24324b362b67d04c39a71dcdb1a4c552a&quot;,
+  &quot;input_sha256&quot;: &quot;c0393625faac061999640fa0712ea3d9f1e750a71eaa61a7569ca951b8ac287b&quot;,
+  &quot;policy_sha256&quot;: &quot;55388e4d246046534fad0c67840653156f5438e339b554dca802277ce6c38009&quot;,
+  &quot;evidence_level&quot;: &quot;synthetic_declared&quot;
+}</pre><h2>用户声明配置（未外部核验）</h2><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;data_kind&quot;: &quot;synthetic&quot;,
+  &quot;rights_reference&quot;: &quot;Self-generated fictional examples; no market observations.&quot;,
+  &quot;coverage&quot;: {
+    &quot;start&quot;: &quot;2030-01-01&quot;,
+    &quot;end&quot;: &quot;2030-12-31&quot;,
+    &quot;complete&quot;: true,
+    &quot;evidence_reference&quot;: &quot;Fictional synthetic calendar; not an SSE history.&quot;
+  },
+  &quot;events&quot;: [],
+  &quot;max_pair_lag_seconds&quot;: 1
+}</pre><h2>汇总</h2><pre>{
+  &quot;rows&quot;: 6,
+  &quot;columns&quot;: [
+    &quot;date&quot;,
+    &quot;code&quot;,
+    &quot;underlying&quot;,
+    &quot;cp&quot;,
+    &quot;strike&quot;,
+    &quot;expiry&quot;,
+    &quot;contract_unit&quot;,
+    &quot;adjustment_flag&quot;,
+    &quot;price&quot;,
+    &quot;price_type&quot;,
+    &quot;bid&quot;,
+    &quot;ask&quot;,
+    &quot;bid_qty&quot;,
+    &quot;ask_qty&quot;,
+    &quot;price_known_at&quot;,
+    &quot;spot&quot;,
+    &quot;spot_known_at&quot;,
+    &quot;r&quot;,
+    &quot;q&quot;,
+    &quot;r_known_at&quot;,
+    &quot;q_known_at&quot;,
+    &quot;r_reference&quot;,
+    &quot;q_reference&quot;,
+    &quot;terms_reference&quot;,
+    &quot;source_reference&quot;
+  ],
+  &quot;historical_iv&quot;: {
+    &quot;conditional_input_consistent&quot;: 6
+  },
+  &quot;pair&quot;: {
+    &quot;conditional_input_consistent&quot;: 6
+  },
+  &quot;unique_term_pairs&quot;: 3,
+  &quot;conditional_pairs&quot;: 3,
+  &quot;issue_counts&quot;: {},
+  &quot;severity_counts&quot;: {}
+}</pre><h2>适用限制</h2><ul><li>不下载/上传数据；不验证引用真实性或许可</li><li>不验证独立每日合约母集或日期块样本外研究</li><li>不计算IV、carry或价格拟合；不支持动态调整合约</li><li>条件一致不等于研究合格；后续需外部证据审阅</li></ul><h2>行级检查（业务记录号，从1开始，不是物理文本行号）</h2><table><tr><th>记录</th><th>对侧业务记录</th><th>历史IV输入</th><th>配对输入</th><th>问题与建议</th></tr><tr><td>1</td><td>2</td><td>conditional_input_consistent</td><td>conditional_input_consistent</td><td>所实现的检查无问题；仍需外部证据审阅</td></tr><tr><td>2</td><td>1</td><td>conditional_input_consistent</td><td>conditional_input_consistent</td><td>所实现的检查无问题；仍需外部证据审阅</td></tr><tr><td>3</td><td>4</td><td>conditional_input_consistent</td><td>conditional_input_consistent</td><td>所实现的检查无问题；仍需外部证据审阅</td></tr><tr><td>4</td><td>3</td><td>conditional_input_consistent</td><td>conditional_input_consistent</td><td>所实现的检查无问题；仍需外部证据审阅</td></tr><tr><td>5</td><td>6</td><td>conditional_input_consistent</td><td>conditional_input_consistent</td><td>所实现的检查无问题；仍需外部证据审阅</td></tr><tr><td>6</td><td>5</td><td>conditional_input_consistent</td><td>conditional_input_consistent</td><td>所实现的检查无问题；仍需外部证据审阅</td></tr></table></html>

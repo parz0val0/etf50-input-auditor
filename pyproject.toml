@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "derivatives-pricing"
+version = "0.4.0rc6"
+description = "Local 50ETF research-input admission checks and bounded numerical diagnostics"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "JasonChen"}]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+etf50-preflight = "derivatives_pricing.preflight:main"
+etf50-audit = "derivatives_pricing.admission:main"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+market-data = ["pandas>=2,<3", "openpyxl>=3.1,<4", "numpy>=1.24,<3"]
+web = ["numpy>=1.24,<3"]
+notebook = ["matplotlib>=3.7,<4", "nbformat>=5.9,<6", "Markdown>=3.6,<4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

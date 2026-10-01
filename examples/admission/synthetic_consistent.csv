@@ -1,0 +1,3 @@
+date,code,underlying,cp,strike,expiry,contract_unit,adjustment_flag,price,price_type,bid,ask,bid_qty,ask_qty,price_known_at,spot,spot_known_at,r,q,r_known_at,q_known_at,r_reference,q_reference,terms_reference,source_reference
+2030-01-02,SYN-C-001,510050,C,2.7,2030-03-01,10000,M,.1,mid,.09,.11,10,10,2030-01-02T14:00:00+08:00,2.7,2030-01-02T14:00:00+08:00,.02,0,2030-01-02T11:00:00+08:00,2030-01-01T11:00:00+08:00,synthetic scenario,synthetic scenario,synthetic standard terms,self-generated fixture
+2030-01-02,SYN-P-001,510050,P,2.7,2030-03-01,10000,M,.1,mid,.09,.11,10,10,2030-01-02T14:00:00+08:00,2.7,2030-01-02T14:00:00+08:00,.02,0,2030-01-02T11:00:00+08:00,2030-01-01T11:00:00+08:00,synthetic scenario,synthetic scenario,synthetic standard terms,self-generated fixture

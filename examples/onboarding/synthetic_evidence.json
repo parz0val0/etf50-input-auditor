@@ -1,0 +1,85 @@
+{
+  "data_kind": "synthetic",
+  "scope": "fictional generated evidence; not SSE observations",
+  "spot_sequence": [
+    {
+      "known_at": "2030-01-02T14:00:00+08:00",
+      "price": 2.69
+    },
+    {
+      "known_at": "2030-01-02T14:00:02+08:00",
+      "price": 2.7
+    }
+  ],
+  "prior_estimate": {
+    "q": 0,
+    "known_at": "2030-01-02T13:00:00+08:00",
+    "method": "fictional pre-observation fixed scenario estimate"
+  },
+  "later_information": {
+    "q": 0.015,
+    "known_at": "2030-01-02T14:00:02+08:00",
+    "usable_at_observation": false
+  },
+  "settlement_value": {
+    "price": 0.1419,
+    "not_independent_market_price": true
+  },
+  "generation": "own Black-Scholes synthetic scenario, sigma=.2, r=.02, q=0, S=2.69; not independent truth",
+  "quote_sequence": [
+    {
+      "code": "FICTION-C-1",
+      "business_time": "2030-01-02T14:00:00+08:00",
+      "bid": 0.1411,
+      "ask": 0.1431,
+      "mid": 0.1421,
+      "quantity": 10
+    },
+    {
+      "code": "FICTION-P-1",
+      "business_time": "2030-01-02T14:00:00+08:00",
+      "bid": 0.0428,
+      "ask": 0.0448,
+      "mid": 0.0438,
+      "quantity": 10
+    },
+    {
+      "code": "FICTION-C-2",
+      "business_time": "2030-01-02T14:00:00+08:00",
+      "bid": 0.0838,
+      "ask": 0.0858,
+      "mid": 0.0848,
+      "quantity": 10
+    },
+    {
+      "code": "FICTION-P-2",
+      "business_time": "2030-01-02T14:00:00+08:00",
+      "bid": 0.0853,
+      "ask": 0.0873,
+      "mid": 0.0863,
+      "quantity": 10
+    },
+    {
+      "code": "FICTION-C-3",
+      "business_time": "2030-01-02T14:00:00+08:00",
+      "bid": 0.0447,
+      "ask": 0.0467,
+      "mid": 0.0457,
+      "quantity": 10
+    },
+    {
+      "code": "FICTION-P-3",
+      "business_time": "2030-01-02T14:00:00+08:00",
+      "bid": 0.1459,
+      "ask": 0.1479,
+      "mid": 0.1469,
+      "quantity": 10
+    }
+  ],
+  "effective_terms": {
+    "underlying": "510050",
+    "unit": 10000,
+    "flag": "M",
+    "calendar": "fictional no-event interval; no official claim"
+  }
+}

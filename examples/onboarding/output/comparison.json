@@ -1,0 +1,156 @@
+{
+  "scope": "固定、完全合成案例；不是市场实证或资格认证",
+  "evidence_truth_verified": false,
+  "data_kind": "synthetic",
+  "checker_version": "0.4.0rc6",
+  "checker_sha256": "867b8949a92fab692388e664623ef2a24324b362b67d04c39a71dcdb1a4c552a",
+  "fixture_sha256": {
+    "before.csv": "e455e19b89c0973c2a19594e2983b408a01c8a78740ea8c50282ac448a9f83a1",
+    "after.csv": "c0393625faac061999640fa0712ea3d9f1e750a71eaa61a7569ca951b8ac287b",
+    "synthetic_policy.json": "55388e4d246046534fad0c67840653156f5438e339b554dca802277ce6c38009",
+    "synthetic_evidence.json": "f39b5412023153a11ef08a8c6c476bceca9c02a660b9aaf01adbfccf1186abab"
+  },
+  "expected_exit_codes": {
+    "before": 1,
+    "after": 0
+  },
+  "root_causes": [
+    {
+      "record": 2,
+      "code": "SPOT_ALIGNMENT_MISSING",
+      "repair": "用独立较早合成ETF观测替代未来观测，不给未来价格回填时间"
+    },
+    {
+      "record": 3,
+      "code": "Q_INPUT_MISSING",
+      "repair": "改用事前合成估计及其真实场景已知时间，不把后来信息伪装已知"
+    },
+    {
+      "record": 6,
+      "code": "SETTLEMENT_NOT_INDEPENDENT",
+      "repair": "按独立合成BBO重新计算mid和价格来源，不仅改price_type"
+    }
+  ],
+  "input_changes": [
+    {
+      "record": 2,
+      "field": "spot",
+      "before": "2.70",
+      "after": "2.69"
+    },
+    {
+      "record": 2,
+      "field": "spot_known_at",
+      "before": "2030-01-02T14:00:02+08:00",
+      "after": "2030-01-02T14:00:00+08:00"
+    },
+    {
+      "record": 3,
+      "field": "q",
+      "before": ".015",
+      "after": "0"
+    },
+    {
+      "record": 3,
+      "field": "q_known_at",
+      "before": "2030-01-02T14:00:02+08:00",
+      "after": "2030-01-02T13:00:00+08:00"
+    },
+    {
+      "record": 3,
+      "field": "q_reference",
+      "before": "synthetic_evidence.json:later_information",
+      "after": "synthetic_evidence.json:prior_estimate"
+    },
+    {
+      "record": 6,
+      "field": "price",
+      "before": "0.1419",
+      "after": "0.1469"
+    },
+    {
+      "record": 6,
+      "field": "price_type",
+      "before": "settle",
+      "after": "mid"
+    },
+    {
+      "record": 6,
+      "field": "source_reference",
+      "before": "synthetic_evidence.json:settlement_value",
+      "after": "synthetic_evidence.json:quote_sequence"
+    }
+  ],
+  "records": [
+    {
+      "record": 1,
+      "historical_iv_before": "conditional_input_consistent",
+      "historical_iv_after": "conditional_input_consistent",
+      "pair_before": "conditional_input_consistent",
+      "pair_after": "conditional_input_consistent",
+      "issues_before": [],
+      "issues_after": []
+    },
+    {
+      "record": 2,
+      "historical_iv_before": "needs_evidence",
+      "historical_iv_after": "conditional_input_consistent",
+      "pair_before": "conditional_input_consistent",
+      "pair_after": "conditional_input_consistent",
+      "issues_before": [
+        "SPOT_ALIGNMENT_MISSING"
+      ],
+      "issues_after": []
+    },
+    {
+      "record": 3,
+      "historical_iv_before": "needs_evidence",
+      "historical_iv_after": "conditional_input_consistent",
+      "pair_before": "conditional_input_consistent",
+      "pair_after": "conditional_input_consistent",
+      "issues_before": [
+        "Q_INPUT_MISSING"
+      ],
+      "issues_after": []
+    },
+    {
+      "record": 4,
+      "historical_iv_before": "conditional_input_consistent",
+      "historical_iv_after": "conditional_input_consistent",
+      "pair_before": "conditional_input_consistent",
+      "pair_after": "conditional_input_consistent",
+      "issues_before": [],
+      "issues_after": []
+    },
+    {
+      "record": 5,
+      "historical_iv_before": "conditional_input_consistent",
+      "historical_iv_after": "conditional_input_consistent",
+      "pair_before": "blocked",
+      "pair_after": "conditional_input_consistent",
+      "issues_before": [
+        "PAIR_NOT_SYNCHRONOUS_MID",
+        "PAIR_PEER_BLOCKED"
+      ],
+      "issues_after": []
+    },
+    {
+      "record": 6,
+      "historical_iv_before": "blocked",
+      "historical_iv_after": "conditional_input_consistent",
+      "pair_before": "blocked",
+      "pair_after": "conditional_input_consistent",
+      "issues_before": [
+        "SETTLEMENT_NOT_INDEPENDENT",
+        "PAIR_NOT_SYNCHRONOUS_MID",
+        "PAIR_PEER_EVIDENCE_MISSING"
+      ],
+      "issues_after": []
+    }
+  ],
+  "limits": [
+    "合成证据文件由本项目构造；其引用真实性不由审查器自动验证",
+    "条件输入一致不是数据许可、母集、市场定价或样本外有效性认证",
+    "状态前后对比不评价模型、预测能力或工具使用者成功率"
+  ]
+}
